@@ -1,0 +1,102 @@
+    .login-btn {
+        margin-left: 30px;
+        margin-right: 10PX;
+    }
+    
+    .cart-icon {
+        width: 35px;
+        display: inline-block;
+        margin-right: 5px;
+    }
+    
+    .logo-nav {
+        width: 119px;
+        display: inline-block;
+        margin-left: 20px;
+    }
+    
+    .bg-dark {
+        background-color: black!important;
+    }
+    
+    .nav-option {
+        /* border: 1px solid white; */
+        font-size: 18px;
+        color: white!important;
+    }
+    
+    .product-title {
+        color: black;
+        font-size: 20px;
+    }
+    
+    .order-btn {
+        background-color: black!important;
+    }
+    
+    .order-btn:hover {
+        /* background-color: white!important;
+        color: black;
+        font-weight: bold; */
+        border: .5px solid black;
+    }
+    
+    .cart-quan {
+        background-color: #FF7400 !important;
+        color: white;
+        margin-right: 25px;
+        border-radius: 50%;
+    }
+    
+    .cart-quan:hover {
+        background-color: #FF7400 !important;
+        color: white!important;
+    }
+    
+    .cart-row {
+        display: flex;
+        align-items: flex-start;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        /* border-bottom: .5px dotted black; */
+    }
+    
+    .quantity {
+        display: inline-block;
+        font-weight: 700;
+        padding-right: 10px;
+    }
+    
+    .row-image {
+        width: 100px;
+    }
+    
+    .change-quantity {
+        width: 12px;
+        cursor: pointer;
+        display: block;
+    }
+    
+    .chg-quantity {
+        width: 10px;
+    }
+    /* designing shipping form */
+    
+    .form-field {
+        /* width: 25px; */
+        display: inline-block;
+        padding: 5px;
+    }
+    
+    .hidden {
+        display: none!important;
+    }
+    
+    .delete-btn {
+        width: 20px;
+    }
+    
+    a:not([href]) {
+        color: white!important;
+        text-decoration: none;
+    }
