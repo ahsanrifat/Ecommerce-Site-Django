@@ -23,7 +23,13 @@ def cart(request):
 
 
 def checkout(request):
-    context={}
+    if request.user.is_authenticated: 
+        customer=request.user
+        customer=models.Customer.objects.get(user=customer)
+        order,flag=models.Order.objects.get_or_create(owner=customer,is_ordered=False)
+        items=models.OrderItem.objects.filter(relatedOrder=order).order_by('-date_added')
+    # else:
+    context={"items":items,'order':order}
     return render(request,'store/checkout.html',context)
 
 
