@@ -99,3 +99,7 @@ def get_cart_item(request):
         
     return JsonResponse(str(quan),safe=False)
     
+
+
+def register_user(request):
+    return render(request,'store/register.html')

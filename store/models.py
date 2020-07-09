@@ -7,7 +7,14 @@ import datetime
 class Customer(models.Model):
     user=models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE)
     name=models.CharField(max_length=200,null=True)
-    email=models.CharField(max_length=200)
+    email=models.CharField(max_length=200,null=True,blank=True)
+    city=models.CharField(max_length=200,null=True,blank=True)
+    area=models.CharField(max_length=200,null=True,blank=True)
+    password=models.CharField(max_length=200,null=True,blank=True)
+    zipcode=models.CharField(max_length=200,null=True,blank=True)
+    phone_number=models.CharField(max_length=13,null=True,blank=True)
+    shipping_address=models.CharField(max_length=200,null=True,blank=True)
+    date_created=models.DateTimeField(default=datetime.datetime.now)
     
     def __str__(self):
         return self.name
@@ -34,8 +41,12 @@ class Product(models.Model):
 class Order(models.Model):
     is_ordered=models.BooleanField(default=False)
     owner=models.ForeignKey(Customer,on_delete=models.CASCADE,null=True)
-    date_added=date_added=models.DateTimeField(auto_now=True)
-    
+    date_added=models.DateTimeField(default=datetime.datetime.now)
+    phone_number=models.CharField(max_length=13,null=True,blank=True)
+    shipping_address=models.CharField(max_length=200,null=True,blank=True)
+    city=models.CharField(max_length=200,null=True,blank=True)
+    area=models.CharField(max_length=200,null=True,blank=True)
+    zipcode=models.CharField(max_length=200,null=True,blank=True)
     def get_cart_quantity(self):
         total_quan=0
         for item in OrderItem.objects.filter(relatedOrder=self):

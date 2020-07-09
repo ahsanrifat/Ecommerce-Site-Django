@@ -1,5 +1,5 @@
 {% extends 'store/main.html' %}{%load static%} {%block content%}
-<div class="container" style="margin-top: 5%;">
+<div class="container" style="margin-top: 5%; margin-bottom: 20px;">
     <div class="row">
         <div class="col-lg-6">
             <div class="box-element">
@@ -38,7 +38,6 @@
                             <input required class="form-control" type="email" name="email" placeholder="Email..">
                         </div>
                     </div>
-
                     <div id="shipping-info">
                         <hr>
                         <p>Shipping Information:</p>
@@ -59,7 +58,6 @@
                             <input class="form-control" type="text" name="area" placeholder="Area..">
                         </div>
                     </div>
-
                     <hr>
                     <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
                 </form>
@@ -67,10 +65,7 @@
             <div class="box-element hidden" id="payment-info">
                 <small>Paypal Option</small>
             </div>
-
         </div>
-
-
     </div>
 </div>
 {%endblock content%}

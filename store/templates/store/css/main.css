@@ -1,3 +1,7 @@
 body {
     background-color: blue;
 }
+
+.form-fld {
+    margin-bottom: 10px;
+}

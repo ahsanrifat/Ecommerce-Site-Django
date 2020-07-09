@@ -95,3 +95,29 @@ function setCartItem() {
             document.getElementById('nav-cart').innerHTML = data;
         });
 }
+
+// document.getElementsByClassName("form-fld").addEventListener("mouseout", function() {
+
+//     console.log("asds");
+// })
+
+var formField = document.getElementById("register-form");
+
+// formField.addEventListener('submit', (e) => {
+//     var x = document.forms["register-form"]["name"].value;
+//     if (x == "") {
+//         alert("Name must be filled out");
+//         return false;
+//     }
+// })
+
+function register_validation() {
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var address = document.getElementById("address").value;
+    var password = document.getElementById("password").value;
+    var confirm_password = document.getElementById("confirm-password").value;
+
+
+}
