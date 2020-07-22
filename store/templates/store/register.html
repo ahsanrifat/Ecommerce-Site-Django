@@ -32,17 +32,17 @@
         </div>
 
         <div class="password form-fld">
-            <input class="form-control inp-fld" type="text" placeholder="Password" id='password' required="required">
-            <i class=" fa fa-check-circle hidden"></i>
-            <i class=" fa fa-exclamation-circle hidden"></i>
-            <small id="error-msz" class="hidden">Erroe Occured</small>
+            <input class="form-control inp-fld" type="password" placeholder="Password" id='password' required="required">
+            <i class=" fa fa-check-circle  hidden" id='pass-icon'></i>
+            <i class=" fa fa-exclamation-circle  hidden" id='err-pass-icon'></i>
+            <small id="error-msz-pass" class="hidden">Erroe Occured</small>
         </div>
 
         <div class="conf-password form-fld">
-            <input class="form-control inp-fld" type="text" placeholder="Confirm Password" id='confirm-password' required="required">
-            <i class=" fa fa-check-circle hidden"></i>
-            <i class=" fa fa-exclamation-circle hidden"></i>
-            <small id="error-msz" class="hidden">Erroe Occured</small>
+            <input class="form-control inp-fld" type="password" placeholder="Confirm Password" id='confirm-password' required="required">
+            <i class=" fa fa-check-circle  hidden" id='matched-pass-icon'></i>
+            <i class=" fa fa-exclamation-circle  hidden" id='err-confPass-icon'></i>
+            <small id="error-msz-confPass" class="hidden">Erroe Occured</small>
         </div>
 
 
@@ -50,4 +50,6 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+<script type='text/javascript' src="{% static 'js/register.js' %}"></script>
 {%endblock content%}

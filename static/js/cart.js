@@ -8,7 +8,7 @@ for (var i = 0; i < update_store.length; i++) {
         var action = this.dataset.action
         console.log(product_id, action)
         if (user == 'AnonymousUser') {
-            console.log("Not Logged In")
+            addCookieItem(product_id, action);
         } else {
             update_user_order(product_id, action);
         }
@@ -19,9 +19,9 @@ for (var i = 0; i < update_cart.length; i++) {
     update_cart[i].addEventListener('click', function() {
         var product_id = this.dataset.product
         var action = this.dataset.action
-        console.log(product_id, action)
+        console.log(product_id, action, user);
         if (user == 'AnonymousUser') {
-            console.log("Not Logged In")
+            addCookieItem(product_id, action);
         } else {
             update_user_order2(product_id, action);
         }
@@ -77,47 +77,81 @@ function update_user_order2(product_id, action) {
 
 }
 
-function setCartItem() {
-    console.log("Finding Cart Items")
-    var url = '/get_cart_item/'
-    fetch('/get_cart_item/', {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': csrftoken,
-            },
 
-        })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log("Data:", data);
-            document.getElementById('nav-cart').innerHTML = data;
-        });
+
+
+
+
+function getCookie(name) {
+    var cookieArr = document.cookie.split(";");
+    for (var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+        if (name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
 }
 
-// document.getElementsByClassName("form-fld").addEventListener("mouseout", function() {
-
-//     console.log("asds");
-// })
-
-var formField = document.getElementById("register-form");
-
-// formField.addEventListener('submit', (e) => {
-//     var x = document.forms["register-form"]["name"].value;
-//     if (x == "") {
-//         alert("Name must be filled out");
-//         return false;
-//     }
-// })
-
-function register_validation() {
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var phone = document.getElementById("phone").value;
-    var address = document.getElementById("address").value;
-    var password = document.getElementById("password").value;
-    var confirm_password = document.getElementById("confirm-password").value;
+var cart = JSON.parse(getCookie('cart'));
+if (cart == undefined) {
+    cart = {};
+    console.log("Cart was created")
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain;path=/ "
+}
+console.log("cart:", cart);
 
 
+function addCookieItem(product_id, action) {
+    console.log("Using cookie as not logged in");
+    if (action == 'add') {
+        if (cart[product_id] == undefined) {
+            cart[product_id] = { 'quantity': 1 };
+        } else {
+            cart[product_id]['quantity'] += 1;
+        }
+    }
+    if (action == 'remove') {
+        if (cart[product_id]['quantity'] > 0) {
+            cart[product_id]['quantity'] -= 1;
+        }
+        if (cart[product_id]['quantity'] != 0) {
+            delete cart[product_id];
+        }
+    }
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain;path=/ "
+    var quan = 0;
+    for (const id in cart) {
+        quan += (cart[id]['quantity']);
+    }
+    document.getElementById('nav-cart').innerHTML = quan;
+}
+
+function setCartItem() {
+    if (user != 'AnonymousUser') {
+        var url = '/get_cart_item/'
+        fetch('/get_cart_item/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                },
+
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Data:", data);
+                document.getElementById('nav-cart').innerHTML = data;
+            });
+    } else {
+        var cart = JSON.parse(getCookie('cart'));
+        // console.log("Getting item number from cookie")
+        var quan = 0;
+        for (const id in cart) {
+            quan += (cart[id]['quantity']);
+        }
+        // console.log(quan)
+        document.getElementById('nav-cart').innerHTML = quan;
+    }
 }

@@ -12,17 +12,34 @@ def store(request):
     return render(request,'store/store.html',context)
 
 def cart(request):
+    items=set()
+    total_quantity=0
+    total_price=0
     if request.user.is_authenticated: 
         customer=request.user
         customer=models.Customer.objects.get(user=customer)
         order,flag=models.Order.objects.get_or_create(owner=customer,is_ordered=False)
+        total_price=order.get_cart_total()
+        total_quantity=order.get_cart_quantity()
         items=models.OrderItem.objects.filter(relatedOrder=order).order_by('-date_added')
-    # else:
-    context={"items":items,'order':order}
+    else:
+        try:
+            cart=json.loads(request.COOKIES['cart'])
+        except:
+            cart={}
+        
+        for id in cart:
+            product=models.Product.objects.get(id=id)
+            items.add(product)
+
+    print(items)
+    context={"items":items,'total_quantity':total_quantity,'total_price':total_price}
     return render(request,'store/cart.html',context)
 
 
 def checkout(request):
+    items=None
+    order=None
     if request.user.is_authenticated: 
         customer=request.user
         customer=models.Customer.objects.get(user=customer)
@@ -88,7 +105,7 @@ def updateItem(request):
 
 
 def get_cart_item(request):
-    
+    quan=0
     if request.user.is_authenticated:
         customer=request.user.customer
         order=models.Order.objects.filter(owner=customer,is_ordered=False)
@@ -103,3 +120,6 @@ def get_cart_item(request):
 
 def register_user(request):
     return render(request,'store/register.html')
+
+def background(request):
+    return False
