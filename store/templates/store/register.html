@@ -1,8 +1,9 @@
 {% extends 'store/main.html' %}{%load static%} {%block content%}
 <div class="container user-regs" style="margin-top: 5%; margin-bottom: 20px;">
     <h2>New User Registration Form</h2>
-    <form id='register-form' class='register-form' onsubmit="return register_validation()"><br>
-
+    <!-- onsubmit="return register_validation()" -->
+    <form id='register-form' class='register-form' onsubmit="return register_validation(event)"><br>
+        <!-- {%csrf_token%} -->
         <div class="name form-fld" id="frm-fld">
             <input class="form-control inp-fld" type="text" placeholder="Name" id='name' required="required">
             <i class=" fa fa-check-circle hidden"></i>
@@ -51,5 +52,12 @@
     </form>
 </div>
 
+
+
+<!-- <form action="" method="POST">
+{%csrf_token%}
+    {{form.as_p}}
+
+</form> -->
 <script type='text/javascript' src="{% static 'js/register.js' %}"></script>
 {%endblock content%}

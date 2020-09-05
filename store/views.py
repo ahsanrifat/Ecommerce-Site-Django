@@ -3,6 +3,7 @@ from store import models
 from django.http import JsonResponse
 import json
 import datetime
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
@@ -119,7 +120,30 @@ def get_cart_item(request):
 
 
 def register_user(request):
-    return render(request,'store/register.html')
+    form=UserCreationForm()
+    context={'form':form}
+    if request.method=='POST':
+        post_data=request.POST
+        post_data=dict(post_data.lists())
+        print((post_data))
+    return render(request,'store/register.html',context)
+
+def register_user_db(request):
+    data=json.loads(request.body)
+    email=(data['email'])
+    phone=(data['phone'])
+    address=(data['address'])
+    password=(data['password'])
+    print(data)
+    print(email)
+    print(phone)
+    print(address)
+    print(password)
+    return JsonResponse("0",safe=False)
+   
+
+def login_user(request):
+    return render(request,'store/login.html')
 
 def background(request):
     return False
