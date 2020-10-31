@@ -1,63 +1,26 @@
-{% extends 'store/main.html' %}{%load static%} {%block content%}
-<div class="container user-regs" style="margin-top: 5%; margin-bottom: 20px;">
-    <h2>New User Registration Form</h2>
-    <!-- onsubmit="return register_validation()" -->
-    <form id='register-form' class='register-form' onsubmit="return register_validation(event)"><br>
-        <!-- {%csrf_token%} -->
-        <div class="name form-fld" id="frm-fld">
-            <input class="form-control inp-fld" type="text" placeholder="Name" id='name' required="required">
-            <i class=" fa fa-check-circle hidden"></i>
-            <i class=" fa fa-exclamation-circle hidden"></i>
-            <small id="error-msz-name" class="hidden">Erroe Occured</small>
-        </div>
+{% extends 'store/main.html' %}{% load static %}
+{% block content %}
 
-        <div class="email form-fld">
-            <input class="form-control inp-fld" type="text" placeholder="Emain Address" id='email' required="required">
-            <i class=" fa fa-check-circle hidden"></i>
-            <i class=" fa fa-exclamation-circle hidden"></i>
-            <small id="error-msz" class="hidden">Erroe Occured</small>
-        </div>
-
-        <div class="phone form-fld">
-            <input class="form-control inp-fld" type="text" placeholder="Phone Number" id='phone' required="required">
-            <i class=" fa fa-check-circle hidden"></i>
-            <i class=" fa fa-exclamation-circle hidden"></i>
-            <small id="error-msz" class="hidden">Erroe Occured</small>
-        </div>
-
-        <div class="delivery-address form-fld">
-            <input class="form-control inp-fld" type="text" placeholder="Delivery Address" id='address' required="required">
-            <i class=" fa fa-check-circle hidden"></i>
-            <i class=" fa fa-exclamation-circle hidden"></i>
-            <small id="error-msz" class="hidden">Erroe Occured</small>
-        </div>
-
-        <div class="password form-fld">
-            <input class="form-control inp-fld" type="password" placeholder="Password" id='password' required="required">
-            <i class=" fa fa-check-circle  hidden" id='pass-icon'></i>
-            <i class=" fa fa-exclamation-circle  hidden" id='err-pass-icon'></i>
-            <small id="error-msz-pass" class="hidden">Erroe Occured</small>
-        </div>
-
-        <div class="conf-password form-fld">
-            <input class="form-control inp-fld" type="password" placeholder="Confirm Password" id='confirm-password' required="required">
-            <i class=" fa fa-check-circle  hidden" id='matched-pass-icon'></i>
-            <i class=" fa fa-exclamation-circle  hidden" id='err-confPass-icon'></i>
-            <small id="error-msz-confPass" class="hidden">Erroe Occured</small>
-        </div>
-
-
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
-
-
-
-<!-- <form action="" method="POST">
-{%csrf_token%}
-    {{form.as_p}}
-
-</form> -->
-<script type='text/javascript' src="{% static 'js/register.js' %}"></script>
-{%endblock content%}
+    <!-- <form method="POST">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                        {{ field.label }}
+                                        {{ field }}
+                                    {% endfor %} -->
+    <div class="container user-regs" style="margin-top: 5%; margin-bottom: 20px;">
+        <h2>New User Registration Form</h2>
+        <!-- onsubmit="return register_validation()" -->
+        <form id='register-form' class='register-form' method="POST">
+            <br>
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="name form-fld" id="frm-fld">
+                        {{ field.label }}<br>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary" name="register">Submit</button>
+                </form>
+            </div>
+            <script type='text/javascript' src="{% static 'js/register.js' %}"></script>
+        {% endblock content %}

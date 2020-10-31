@@ -69,8 +69,7 @@ function register_validation(e) {
                 })
             })
             .then((response) => {
-                // return response.json();
-                console.log('response:', response)
+                return response.json();
             })
             .then((data) => {
                 console.log("Data:", data);
